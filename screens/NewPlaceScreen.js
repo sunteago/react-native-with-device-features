@@ -4,6 +4,7 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
 import { useDispatch } from "react-redux";
 import { addPlace } from "../store/places-actions";
+import ImagePicker from "../components/ImagePicker";
 
 export default function NewPlaceScreen(props) {
   const [title, setTitle] = useState("");
@@ -28,6 +29,7 @@ export default function NewPlaceScreen(props) {
           onChangeText={onTitleChangeHandler}
           value={title}
         />
+        <ImagePicker />
         <Button
           title="Save place"
           color={Colors.primary}

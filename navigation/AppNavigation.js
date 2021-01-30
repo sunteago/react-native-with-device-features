@@ -32,7 +32,7 @@ const AppNavigation = () => {
               <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
                   title="Add Place"
-                  iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
+                  iconName={Platform.OS === "andrwoid" ? "md-add" : "ios-add"}
                   onPress={() => {
                     navData.navigation.navigate("NewPlace");
                   }}
