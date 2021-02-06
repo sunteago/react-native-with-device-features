@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
         ...state,
         places: state.places.concat({
           itemData: new Place(
-            Math.random(),
+            action.placeData.id.toString(),
             action.placeData.title,
             action.placeData.image
           ),

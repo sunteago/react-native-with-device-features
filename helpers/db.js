@@ -29,3 +29,24 @@ export const init = () => {
     });
   });
 };
+
+export const insertPlace = (title, imageUri, address, lat, lng) => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `
+            INSERT INTO places 
+            (title, image_uri, address, latitude, longitude) 
+            VALUES
+            (?, ?, ?, ?, ?)`,
+        [title, imageUri, address, lat, lng],
+        (_sqlQuery, success) => {
+          resolve(success);
+        },
+        (_sqlQuery, err) => {
+          reject(err);
+        }
+      );
+    });
+  });
+};
