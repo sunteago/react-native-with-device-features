@@ -1,4 +1,4 @@
-import { ADD_PLACE } from "./places-actions";
+import { ADD_PLACE, SET_PLACES } from "./places-actions";
 import Place from "../models/Place";
 
 const initialState = {
@@ -17,6 +17,17 @@ export default (state = initialState, action) => {
             action.placeData.image
           ),
         }),
+      };
+    case SET_PLACES:
+      return {
+        ...state,
+        places: action.places.map((place) => ({
+          itemData: new Place(
+            place["place_id"],
+            place.title,
+            place["image_uri"]
+          ),
+        })),
       };
     default:
       return state;

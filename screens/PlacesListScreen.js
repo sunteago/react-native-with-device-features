@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import PlaceItem from "../components/PlaceItem";
+import { loadPlaces } from "../store/places-actions";
 
 export default function PlacesListScreen({ navigation }) {
   const state = useSelector((state) => state.places);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadPlaces());
+  }, [dispatch]);
+
   return (
     <FlatList
       data={state.places}
-      keyExtractor={(item) => item.itemData.id}
+      keyExtractor={(item) => item.itemData.id.toString()}
       renderItem={({ item }) => {
         return (
           <PlaceItem
