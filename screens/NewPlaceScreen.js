@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPlace } from "../store/places-actions";
 import ImagePicker from "../components/ImagePicker";
 
 export default function NewPlaceScreen(props) {
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState();
 
   const dispatch = useDispatch();
 
@@ -16,8 +17,12 @@ export default function NewPlaceScreen(props) {
   };
 
   const savePlaceHandler = () => {
-    dispatch(addPlace(title));
+    dispatch(addPlace(title, image));
     props.navigation.goBack();
+  };
+
+  const imageTakenHandler = (imagePath) => {
+    setImage(imagePath);
   };
 
   return (
@@ -29,7 +34,7 @@ export default function NewPlaceScreen(props) {
           onChangeText={onTitleChangeHandler}
           value={title}
         />
-        <ImagePicker />
+        <ImagePicker onImageTaken={imageTakenHandler} />
         <Button
           title="Save place"
           color={Colors.primary}

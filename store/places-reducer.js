@@ -10,9 +10,13 @@ export default (state = initialState, action) => {
     case ADD_PLACE:
       return {
         ...state,
-        places: state.places.concat(
-          new Place(Math.random(), action.placeData.title)
-        ),
+        places: state.places.concat({
+          itemData: new Place(
+            Math.random(),
+            action.placeData.title,
+            action.placeData.image
+          ),
+        }),
       };
     default:
       return state;

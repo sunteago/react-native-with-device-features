@@ -6,19 +6,21 @@ import PlaceItem from "../components/PlaceItem";
 
 export default function PlacesListScreen({ navigation }) {
   const state = useSelector((state) => state.places);
+
   return (
     <FlatList
       data={state.places}
-      renderItem={(item) => {
+      keyExtractor={(item) => item.itemData.id}
+      renderItem={({ item }) => {
         return (
           <PlaceItem
-            image={null}
-            title={item.item.title}
+            image={item.itemData.image}
+            title={item.itemData.title}
             address={null}
             onSelect={() =>
-              props.navigation.navigate("PlaceDetail", {
-                placeTitle: item.item.title,
-                placeId: item.item.id,
+              navigation.navigate("PlaceDetail", {
+                placeTitle: item.itemData.title,
+                placeId: item.itemData.id,
               })
             }
           />

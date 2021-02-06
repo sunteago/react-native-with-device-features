@@ -45,7 +45,7 @@ const AppNavigation = () => {
           name="PlaceDetail"
           component={PlaceDetailScreen}
           options={(navData) => ({
-            headerTitle: navData.navigation.getParam("placeTitle"),
+            headerTitle: navData.route.params.placeTitle,
           })}
         />
         <RootStack.Screen
