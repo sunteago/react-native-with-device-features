@@ -10,8 +10,9 @@ import {
 import Colors from "../constants/Colors";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
+import MapPreview from "./MapPreview";
 
-export default function getLocationHandler(props) {
+export default function getLocationHandler() {
   const [pickedLocation, setPickedLocation] = useState();
   const [isLoading, setLoading] = useState(false);
 
@@ -65,19 +66,20 @@ export default function getLocationHandler(props) {
         ]
       );
     }
-
     setLoading(false);
   };
 
   return (
     <View style={styles.locationPicker}>
-      <View style={styles.mapPreview}>
-        {isLoading ? (
-          <ActivityIndicator size="large" color={Colors.primary} />
-        ) : (
-          <Text> No location chosen yet!</Text>
-        )}
-      </View>
+      <MapPreview style={styles.mapPreview} location={pickedLocation}>
+        <View style={styles.mapPreview}>
+          {isLoading ? (
+            <ActivityIndicator size="large" color={Colors.primary} />
+          ) : (
+            <Text> No location chosen yet!</Text>
+          )}
+        </View>
+      </MapPreview>
       <Button
         title="Get location"
         color={Colors.primary}
@@ -97,7 +99,5 @@ const styles = StyleSheet.create({
     height: 150,
     borderColor: "#ccc",
     borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
